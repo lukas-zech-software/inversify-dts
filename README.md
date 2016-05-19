@@ -7,8 +7,8 @@
 [![img](https://david-dm.org/inversify/dts/peer-status.svg)](https://david-dm.org/inversify/dts/#info=peerDependenciess)
 [![Known Vulnerabilities](https://snyk.io/test/github/inversify/dts/badge.svg)](https://snyk.io/test/github/inversify/dts)
 
-[![NPM](https://nodei.co/npm/inversify.png?downloads=true&downloadRank=true)](https://nodei.co/npm/inversify/)
-[![NPM](https://nodei.co/npm-dl/inversify.png?months=9&height=3)](https://nodei.co/npm/inversify/)
+[![NPM](https://nodei.co/npm/inversify.png?downloads=true&downloadRank=true)](https://nodei.co/npm/inversify-dts/)
+[![NPM](https://nodei.co/npm-dl/inversify.png?months=9&height=3)](https://nodei.co/npm/inversify-dts/)
 
 The InversifyJS TypeScript type definitions.
 
