@@ -1,0 +1,7 @@
+{
+  "dependencies": {},
+  "globalDependencies": {
+    "bluebird": "registry:dt/bluebird#2.0.0+20160319051630",
+    "harmony-proxy": "registry:dt/harmony-proxy#1.0.0+20160317120654"
+  }
+}

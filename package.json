@@ -1,0 +1,32 @@
+{
+  "name": "inversify-dts",
+  "version": "1.0.0",
+  "description": "The InversifyJS TypeScript type definitions",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inversify/dts.git"
+  },
+  "keywords": [
+    "inversify",
+    "typescript",
+    "dts"
+  ],
+  "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inversify/dts/issues"
+  },
+  "homepage": "https://github.com/inversify/dts#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-tslint": "^5.0.0",
+    "gulp-typescript": "^2.13.4",
+    "run-sequence": "^1.2.0",
+    "tslint": "^3.10.2"
+  }
+}
