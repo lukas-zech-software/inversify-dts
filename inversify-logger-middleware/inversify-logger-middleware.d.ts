@@ -45,7 +45,7 @@ declare namespace inversifyLoggerMiddleware {
         time: string;
     }
 
-    export function makeLoggerMiddleware(settings?: ILoggerSettings, renderer?: (out: string) => void): inversify.IMiddleware;
+    export function makeLoggerMiddleware(settings?: ILoggerSettings, renderer?: (out: ILogEntry) => void): inversify.IMiddleware;
     export function textSerializer(entry: ILogEntry): string;
 
 }

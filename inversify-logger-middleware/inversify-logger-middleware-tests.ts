@@ -3,20 +3,20 @@
 
 declare var kernel: inversify.IKernel;
 
-import makeLoggerMiddleware from "inversify-logger-middleware";
+import { makeLoggerMiddleware, textSerializer } from "inversify-logger-middleware";
 
 interface ILoggerOutput<T> {
     entry: T;
 }
 
 let makeStringRenderer = function (loggerOutput: ILoggerOutput<string>) {
-    return function (entry: ILogEntry) {
+    return function (entry: inversifyLoggerMiddleware.ILogEntry) {
         loggerOutput.entry = textSerializer(entry);
     };
 };
 
 let makeObjRenderer = function (loggerOutput: ILoggerOutput<any>) {
-    return function (entry: ILogEntry) {
+    return function (entry: inversifyLoggerMiddleware.ILogEntry) {
         loggerOutput.entry = entry;
     };
 };
@@ -46,12 +46,15 @@ let options: inversifyLoggerMiddleware.ILoggerSettings = {
     time: true
 };
 
-let loggerOutput: ILoggerOutput<string> = { entry: null };
-let stringRenderer = makeStringRenderer(loggerOutput);
-let logger = makeLoggerMiddleware(null, stringRenderer);
+let logger = makeLoggerMiddleware();
 kernel.applyMiddleware(logger);
 
-let loggerOutput: ILoggerOutput<string> = { entry: null };
-let stringRenderer = makeStringRenderer(loggerOutput);
-let logger = makeLoggerMiddleware(options, stringRenderer);
-kernel.applyMiddleware(logger);
+let loggerOutput1: ILoggerOutput<string> = { entry: null };
+let stringRenderer1 = makeStringRenderer(loggerOutput1);
+let logger1 = makeLoggerMiddleware(options, stringRenderer1);
+kernel.applyMiddleware(logger1);
+
+let loggerOutput2: ILoggerOutput<inversifyLoggerMiddleware.ILogEntry> = { entry: null };
+let objRenderer2 = makeObjRenderer(loggerOutput2);
+let logger2 = makeLoggerMiddleware(options, objRenderer2);
+kernel.applyMiddleware(logger2);

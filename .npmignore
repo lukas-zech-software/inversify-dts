@@ -21,6 +21,7 @@ wallaby.js
 .travis.yml
 .gitignore
 .vscode
+.typingsrc
 
 # tests and ts
 
