@@ -5,9 +5,19 @@ declare var kernel: inversify.IKernel;
 
 import makeLoggerMiddleware from "inversify-logger-middleware";
 
-let makeStringRenderer = function (loggerOutput: { content: string }) {
-    return function (out: string) {
-        loggerOutput.content = out;
+interface ILoggerOutput<T> {
+    entry: T;
+}
+
+let makeStringRenderer = function (loggerOutput: ILoggerOutput<string>) {
+    return function (entry: ILogEntry) {
+        loggerOutput.entry = textSerializer(entry);
+    };
+};
+
+let makeObjRenderer = function (loggerOutput: ILoggerOutput<any>) {
+    return function (entry: ILogEntry) {
+        loggerOutput.entry = entry;
     };
 };
 
@@ -36,7 +46,12 @@ let options: inversifyLoggerMiddleware.ILoggerSettings = {
     time: true
 };
 
-let loggerOutput = { content: "" };
+let loggerOutput: ILoggerOutput<string> = { entry: null };
+let stringRenderer = makeStringRenderer(loggerOutput);
+let logger = makeLoggerMiddleware(null, stringRenderer);
+kernel.applyMiddleware(logger);
+
+let loggerOutput: ILoggerOutput<string> = { entry: null };
 let stringRenderer = makeStringRenderer(loggerOutput);
 let logger = makeLoggerMiddleware(options, stringRenderer);
 kernel.applyMiddleware(logger);
