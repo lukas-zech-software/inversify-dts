@@ -1,5 +1,6 @@
 /// <reference path="./inversify-logger-middleware.d.ts" />
 /// <reference path="../inversify/inversify.d.ts" />
+/// <reference path="../typings//index.d.ts" />
 
 declare var kernel: inversify.IKernel;
 

@@ -1,4 +1,5 @@
 /// <reference path="inversify.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 
 import * as Proxy from "harmony-proxy";
 

@@ -3,9 +3,6 @@
 // Definitions by: inversify <https://github.com/inversify>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-/// <reference path="../typings/globals/bluebird/index.d.ts" />
-/// <reference path="../typings/globals/harmony-proxy/index.d.ts" />
-
 interface Symbol {
     toString(): string;
     valueOf(): Object;

@@ -1,10 +1,11 @@
 **/*.js
 *.js
-
+typings
 src
 test
 bundled
 build
+temp
 coverage
 docs
 wiki
