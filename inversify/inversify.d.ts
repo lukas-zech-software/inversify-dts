@@ -53,13 +53,17 @@ declare namespace inversify {
         restore(): void;
     }
 
-    interface IBind extends Function {
+    export interface IBind extends Function {
         <T>(serviceIdentifier: (string|Symbol|INewable<T>)): IBindingToSyntax<T>;
     }
 
-    interface IKernelModule {
+    export interface IKernelModule {
         guid: string;
         registry: (bind: IBind) => void;
+    }
+
+    export interface IKernelModuleConstructor {
+        new(registry: (bind: IBind) => void): IKernelModule;
     }
 
     interface IBindingOnSyntax<T> {
@@ -191,6 +195,7 @@ declare namespace inversify {
     }
 
     export var Kernel: IKernelConstructor;
+    export var KernelModule: IKernelModuleConstructor;
     export var decorate: (decorator: (ClassDecorator|ParameterDecorator), target: any, parameterIndex?: number) => void;
     export function injectable(): (typeConstructor: any) => void;
     export function tagged(metadataKey: string, metadataValue: any): (target: any, targetKey: string, index?: number) => any;

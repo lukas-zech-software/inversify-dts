@@ -64,14 +64,14 @@ module global_module_test {
     kernel.unbindAll();
 
     // Kernel modules
-    let warriors: inversify.IKernelModule = (k: inversify.IKernel) => {
-        k.bind<INinja>("INinja").to(Ninja);
-    };
+    let warriors: inversify.IKernelModule = new inversify.KernelModule((bind: inversify.IBind) => {
+        bind<INinja>("INinja").to(Ninja);
+    });
 
-    let weapons: inversify.IKernelModule = (k: inversify.IKernel) => {
-        k.bind<IKatana>("IKatana").to(Katana);
-        k.bind<IShuriken>("IShuriken").to(Shuriken).inSingletonScope();
-    };
+    let weapons: inversify.IKernelModule = new inversify.KernelModule((bind: inversify.IBind) => {
+        bind<IKatana>("IKatana").to(Katana);
+        bind<IShuriken>("IShuriken").to(Shuriken);
+    });
 
     kernel = new inversify.Kernel();
     kernel.load(warriors, weapons);

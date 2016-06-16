@@ -4,13 +4,14 @@
 import {
     Kernel,
     injectable, tagged, named, targetName, inject, multiInject,
-    IKernel, INewable, IContext, IKernelModule, IFactory, IProvider, IRequest,
+    IKernel, INewable, IContext, IFactory, IProvider, IRequest,
     traverseAncerstors, taggedConstraint, namedConstraint, typeConstraint,
     makePropertyMultiInjectDecorator,
     makePropertyInjectTaggedDecorator,
     makePropertyInjectNamedDecorator,
     makePropertyInjectDecorator,
-    PlanAndResolve, PlanAndResolveArgs
+    PlanAndResolve, PlanAndResolveArgs,
+    KernelModule, IBind, IKernelModule
 } from "inversify";
 
 import * as Proxy from "harmony-proxy";
@@ -63,7 +64,7 @@ module external_module_test {
 
     }
 
-    let kernel = new Kernel();
+    let kernel: IKernel = new Kernel();
     kernel.bind<INinja>("INinja").to(Ninja);
     kernel.bind<IKatana>("IKatana").to(Katana);
     kernel.bind<IShuriken>("IShuriken").to(Shuriken).inSingletonScope();
@@ -76,14 +77,14 @@ module external_module_test {
     kernel.unbindAll();
 
     // Kernel modules
-    let warriors: IKernelModule = (k: IKernel) => {
-        k.bind<INinja>("INinja").to(Ninja);
-    };
+    let warriors: IKernelModule = new KernelModule((bind: IBind) => {
+        bind<INinja>("INinja").to(Ninja);
+    });
 
-    let weapons: IKernelModule = (k: IKernel) => {
-        k.bind<IKatana>("IKatana").to(Katana);
-        k.bind<IShuriken>("IShuriken").to(Shuriken).inSingletonScope();
-    };
+    let weapons: IKernelModule = new KernelModule((bind: IBind) => {
+        bind<IKatana>("IKatana").to(Katana);
+        bind<IShuriken>("IShuriken").to(Shuriken);
+    });
 
     kernel = new Kernel();
     kernel.load(warriors, weapons);
