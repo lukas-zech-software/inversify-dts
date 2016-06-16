@@ -36,22 +36,30 @@ declare namespace inversify {
     }
 
     export interface IKernel {
+        guid: string;
         bind<T>(serviceIdentifier: (string|Symbol|INewable<T>)): IBindingToSyntax<T>;
-        unbind(serviceIdentifier: (string|Symbol|any)): void;
+        unbind(serviceIdentifier: (string|Symbol|INewable<any>)): void;
         unbindAll(): void;
+        isBound(serviceIdentifier: (string|Symbol|INewable<any>)): boolean;
         get<T>(serviceIdentifier: (string|Symbol|INewable<T>)): T;
         getNamed<T>(serviceIdentifier: (string|Symbol|INewable<T>), named: string): T;
         getTagged<T>(serviceIdentifier: (string|Symbol|INewable<T>), key: string, value: any): T;
         getAll<T>(serviceIdentifier: (string|Symbol|INewable<T>)): T[];
         load(...modules: IKernelModule[]): void;
+        unload(...modules: IKernelModule[]): void;
         applyMiddleware(...middleware: IMiddleware[]): void;
         getServiceIdentifierAsString(serviceIdentifier: (string|Symbol|INewable<any>)): string;
         snapshot(): void;
         restore(): void;
     }
 
-    export interface IKernelModule extends Function {
-        (kernel: IKernel): void;
+    interface IBind extends Function {
+        <T>(serviceIdentifier: (string|Symbol|INewable<T>)): IBindingToSyntax<T>;
+    }
+
+    interface IKernelModule {
+        guid: string;
+        registry: (bind: IBind) => void;
     }
 
     interface IBindingOnSyntax<T> {
@@ -85,6 +93,7 @@ declare namespace inversify {
         toDynamicValue(func: () => T): IBindingWhenOnSyntax<T>;
         toConstructor<T2>(constructor: INewable<T2>): IBindingWhenOnSyntax<T>;
         toFactory<T2>(factory: IFactoryCreator<T2>): IBindingWhenOnSyntax<T>;
+        toFunction(func: T): IBindingWhenOnSyntax<T>;
         toAutoFactory<T2>(serviceIdentifier: (string|Symbol|T2)): IBindingWhenOnSyntax<T>;
         toProvider<T2>(provider: IProviderCreator<T2>): IBindingWhenOnSyntax<T>;
     }
@@ -113,6 +122,7 @@ declare namespace inversify {
     }
 
     export interface IContext {
+        guid: string;
         kernel: IKernel;
         plan: IPlan;
         addPlan(plan: IPlan): void;
@@ -124,6 +134,7 @@ declare namespace inversify {
     }
 
     export interface IRequest {
+        guid: string;
         serviceIdentifier: (string|Symbol|INewable<any>);
         parentContext: IContext;
         parentRequest: IRequest;
@@ -137,6 +148,8 @@ declare namespace inversify {
     }
 
     export interface IBinding<T> {
+        guid: string;
+        moduleId: string;
         activated: boolean;
         serviceIdentifier: (string|Symbol|INewable<T>);
         implementationType: INewable<T>;
@@ -151,6 +164,7 @@ declare namespace inversify {
     }
 
     export interface ITarget {
+        guid: string;
         serviceIdentifier: (string|Symbol|INewable<any>);
         name: IQueryableString;
         metadata: Array<IMetadata>;
