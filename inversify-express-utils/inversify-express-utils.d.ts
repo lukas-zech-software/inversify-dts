@@ -15,6 +15,7 @@ declare module "inversify-express-utils" {
 
     interface IInversifyExpressServer {
         setConfig(fn: IConfigFunction): IInversifyExpressServer;
+        setErrorConfig(fn: IConfigFunction): IInversifyExpressServer;
         build(): express.Application;
     }
 
@@ -29,6 +30,8 @@ declare module "inversify-express-utils" {
     interface IHandlerDecorator {
         (target: any, key: string, value: any): void;
     }
+
+    export interface IController {}
 
     export var InversifyExpressServer: IInversifyExpressServerConstructor;
 
