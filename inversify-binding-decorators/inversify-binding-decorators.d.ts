@@ -14,7 +14,7 @@ declare namespace inversifyBindingDecorators {
     }
 
     interface IProvideOnSyntax<T> extends IProvideDoneSyntax<T> {
-        onActivation(fn: (context: inversify.IContext, injectable: T) => T): IProvideWhenSyntax<T>;
+        onActivation(fn: (context: inversify.interfaces.Context, injectable: T) => T): IProvideWhenSyntax<T>;
     }
 
     interface IProvideInWhenOnSyntax<T> extends IProvideInSyntax<T>, IProvideWhenSyntax<T>, IProvideOnSyntax<T> {}
@@ -22,7 +22,7 @@ declare namespace inversifyBindingDecorators {
     interface IProvideWhenOnSyntax<T> extends IProvideWhenSyntax<T>, IProvideOnSyntax<T> {}
 
     interface IProvideWhenSyntax<T> extends IProvideDoneSyntax<T> {
-        when(constraint: (request: inversify.IRequest) => boolean): IProvideOnSyntax<T>;
+        when(constraint: (request: inversify.interfaces.Request) => boolean): IProvideOnSyntax<T>;
         whenTargetNamed(name: string): IProvideOnSyntax<T>;
         whenTargetTagged(tag: string, value: any): IProvideOnSyntax<T>;
         whenInjectedInto(parent: (Function|string)): IProvideOnSyntax<T>;
@@ -34,17 +34,17 @@ declare namespace inversifyBindingDecorators {
         whenAnyAncestorTagged(tag: string, value: any): IProvideOnSyntax<T>;
         whenNoAncestorNamed(name: string): IProvideOnSyntax<T>;
         whenNoAncestorTagged(tag: string, value: any): IProvideOnSyntax<T>;
-        whenAnyAncestorMatches(constraint: (request: inversify.IRequest) => boolean): IProvideOnSyntax<T>;
-        whenNoAncestorMatches(constraint: (request: inversify.IRequest) => boolean): IProvideOnSyntax<T>;
+        whenAnyAncestorMatches(constraint: (request: inversify.interfaces.Request) => boolean): IProvideOnSyntax<T>;
+        whenNoAncestorMatches(constraint: (request: inversify.interfaces.Request) => boolean): IProvideOnSyntax<T>;
     }
 
-    export function autoProvide(kernel: inversify.IKernel, ...modules: any[]): void;
+    export function autoProvide(kernel: inversify.interfaces.Kernel, ...modules: any[]): void;
 
-    export function makeProvideDecorator(kernel: inversify.IKernel):
-        (serviceIdentifier: (string|Symbol|inversify.INewable<any>)) => (target: any) => any;
+    export function makeProvideDecorator(kernel: inversify.interfaces.Kernel):
+        (serviceIdentifier: (string|Symbol|inversify.interfaces.Newable<any>)) => (target: any) => any;
 
-    export function makeFluentProvideDecorator(kernel: inversify.IKernel):
-        (serviceIdentifier: (string|Symbol|inversify.INewable<any>)) => IProvideInWhenOnSyntax<any>;
+    export function makeFluentProvideDecorator(kernel: inversify.interfaces.Kernel):
+        (serviceIdentifier: (string|Symbol|inversify.interfaces.Newable<any>)) => IProvideInWhenOnSyntax<any>;
 
 }
 

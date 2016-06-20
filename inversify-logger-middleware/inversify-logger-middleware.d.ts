@@ -1,4 +1,4 @@
-// Type definitions for inversify 1.0.0-beta.5
+// Type definitions for inversify 1.0.0-beta.6
 // Project: https://github.com/inversify/inversify-logger-middleware
 // Definitions by: inversify <https://github.com/inversify/>
 
@@ -42,13 +42,13 @@ declare namespace inversifyLoggerMiddleware {
         exception: any;
         multiInject: boolean;
         results: any[];
-        rootRequest: inversify.IRequest;
+        rootRequest: inversify.interfaces.Request;
         serviceIdentifier: any;
         target: any;
         time: string;
     }
 
-    export function makeLoggerMiddleware(settings?: ILoggerSettings, renderer?: (out: ILogEntry) => void): inversify.IMiddleware;
+    export function makeLoggerMiddleware(settings?: ILoggerSettings, renderer?: (out: ILogEntry) => void): inversify.interfaces.Middleware;
     export function textSerializer(entry: ILogEntry): string;
 
 }

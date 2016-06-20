@@ -2,7 +2,7 @@
 /// <reference path="../inversify/inversify.d.ts" />
 /// <reference path="../typings//index.d.ts" />
 
-declare var kernel: inversify.IKernel;
+declare var kernel: inversify.interfaces.Kernel;
 
 import { makeLoggerMiddleware, textSerializer } from "inversify-logger-middleware";
 

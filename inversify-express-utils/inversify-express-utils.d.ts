@@ -1,4 +1,4 @@
-// Type definitions for inversify 1.0.0-alpha.3
+// Type definitions for inversify 1.0.0-alpha.4
 // Project: https://github.com/inversify/inversify-express-utils
 // Definitions by: inversify <https://github.com/inversify/>
 
@@ -10,7 +10,7 @@ declare module "inversify-express-utils" {
     import * as inversify from "inversify";
 
     interface IInversifyExpressServerConstructor {
-        new(kernel: inversify.IKernel): IInversifyExpressServer;
+        new(kernel: inversify.interfaces.Kernel): IInversifyExpressServer;
     }
 
     interface IInversifyExpressServer {
