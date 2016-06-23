@@ -6,50 +6,58 @@
 
 declare namespace inversifyLoggerMiddleware {
 
-    export interface ILoggerSettings {
-        request?: IRequestLoggerSettings;
-        time?: boolean;
+    export namespace interfaces {
+
+        export interface LoggerSettings {
+            request?: RequestLoggerSettings;
+            time?: boolean;
+        }
+
+        export interface RequestLoggerSettings {
+            serviceIdentifier?: boolean;
+            bindings?: BindingLoggerSettings;
+            target?: TargetLoggerSettings;
+        }
+
+        export interface BindingLoggerSettings {
+            activated?: boolean;
+            serviceIdentifier?: boolean;
+            implementationType?: boolean;
+            factory?: boolean;
+            provider?: boolean;
+            constraint?: boolean;
+            onActivation?: boolean;
+            cache?: boolean;
+            dynamicValue?: boolean;
+            scope?: boolean;
+            type?: boolean;
+        }
+
+        export interface TargetLoggerSettings {
+            serviceIdentifier?: boolean;
+            name?: boolean;
+            metadata?: boolean;
+        }
+
+        export interface LogEntry {
+            error: boolean;
+            exception: any;
+            multiInject: boolean;
+            results: any[];
+            rootRequest: inversify.interfaces.Request;
+            serviceIdentifier: any;
+            target: any;
+            time: string;
+        }
+
     }
 
-    export interface IRequestLoggerSettings {
-        serviceIdentifier?: boolean;
-        bindings?: IBindingLoggerSettings;
-        target?: ITargetLoggerSettings;
-    }
+    export function makeLoggerMiddleware(
+        settings?: interfaces.LoggerSettings,
+        renderer?: (out: interfaces.LogEntry) => void
+    ): inversify.interfaces.Middleware;
 
-    export interface IBindingLoggerSettings {
-        activated?: boolean;
-        serviceIdentifier?: boolean;
-        implementationType?: boolean;
-        factory?: boolean;
-        provider?: boolean;
-        constraint?: boolean;
-        onActivation?: boolean;
-        cache?: boolean;
-        dynamicValue?: boolean;
-        scope?: boolean;
-        type?: boolean;
-    }
-
-    export interface ITargetLoggerSettings {
-        serviceIdentifier?: boolean;
-        name?: boolean;
-        metadata?: boolean;
-    }
-
-    export interface ILogEntry {
-        error: boolean;
-        exception: any;
-        multiInject: boolean;
-        results: any[];
-        rootRequest: inversify.interfaces.Request;
-        serviceIdentifier: any;
-        target: any;
-        time: string;
-    }
-
-    export function makeLoggerMiddleware(settings?: ILoggerSettings, renderer?: (out: ILogEntry) => void): inversify.interfaces.Middleware;
-    export function textSerializer(entry: ILogEntry): string;
+    export function textSerializer(entry: interfaces.LogEntry): string;
 
 }
 
