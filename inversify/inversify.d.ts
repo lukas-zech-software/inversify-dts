@@ -195,6 +195,7 @@ declare namespace inversify {
         export interface KeyValuePair<T> {
             serviceIdentifier: ServiceIdentifier<any>;
             value: Array<T>;
+            guid: string;
         }
 
         export interface BindingInSyntax<T> {
@@ -247,6 +248,7 @@ declare namespace inversify {
     export function named(name: string): (target: any, targetKey: string, index?: number) => any;
     export function targetName(name: string): (target: any, targetKey: string, index: number) => any;
     export function inject(serviceIdentifier: interfaces.ServiceIdentifier<any>): (target: any, targetKey: string, index?: number) => any;
+    export function guid(): string;
 
     export function multiInject(
         serviceIdentifier: interfaces.ServiceIdentifier<any>
