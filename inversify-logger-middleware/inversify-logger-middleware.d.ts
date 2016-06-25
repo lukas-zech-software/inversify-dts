@@ -42,6 +42,7 @@ declare namespace inversifyLoggerMiddleware {
         export interface LogEntry {
             error: boolean;
             exception: any;
+            guid: string,
             multiInject: boolean;
             results: any[];
             rootRequest: inversify.interfaces.Request;
