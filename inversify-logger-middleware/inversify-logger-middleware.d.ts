@@ -59,7 +59,7 @@ declare namespace inversifyLoggerMiddleware {
     ): inversify.interfaces.Middleware;
 
     export function textSerializer(entry: interfaces.LogEntry): string;
-    export function bindingTypeFormatter(type: number): string; 
+    export function bindingTypeFormatter(type: number): string;
     export function scopeFormatter(scope: number): string;
 
 }
