@@ -9,5 +9,6 @@ interface Window {
 }
 
 declare module "inversify-devtools" {
-  export default var render: (container: string) => void;
+  let render: (container: string) => void;
+  export default render;
 }
