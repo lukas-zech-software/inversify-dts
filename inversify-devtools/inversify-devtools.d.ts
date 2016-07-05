@@ -4,11 +4,11 @@
 
 /// <reference path="../inversify/inversify.d.ts" />
 
-interface Window {
-  __inversifyDevtools__(kernel: inversify.interfaces.Kernel): void;
+interface ConnectKernel extends Function {
+  (kernel: inversify.interfaces.Kernel): void;
 }
 
 declare module "inversify-devtools" {
-  let render: (container: string) => void;
+  let render: (container: string) => ConnectKernel;
   export default render;
 }
