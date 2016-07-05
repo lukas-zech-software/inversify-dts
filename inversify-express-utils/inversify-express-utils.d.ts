@@ -37,6 +37,10 @@ declare module "inversify-express-utils" {
 
     export interface Controller {}
 
+    interface ServiceIdentifiers {
+        Controller: Symbol;
+    }
+
     export var InversifyExpressServer: interfaces.InversifyExpressServerConstructor;
 
     export var Controller: (path: string, ...middleware: express.RequestHandler[]) => (target: any) => void;
@@ -49,5 +53,6 @@ declare module "inversify-express-utils" {
     export var Head: interfaces.HandlerDecoratorFactory;
     export var Delete: interfaces.HandlerDecoratorFactory;
     export var Method: (method: string, path: string, ...middleware: express.RequestHandler[]) => interfaces.HandlerDecorator;
+    export var TYPE: ServiceIdentifiers;
 
 }

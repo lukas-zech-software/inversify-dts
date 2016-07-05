@@ -1,11 +1,13 @@
 /// <reference path="./inversify-express-utils.d.ts" />
 
-import { InversifyExpressServer, Controller, Get, All, Delete, Head, Put, Patch, Post, Method } from "inversify-express-utils";
+import { InversifyExpressServer, Controller, Get, All, Delete, Head, Put, Patch, Post, Method, TYPE } from "inversify-express-utils";
 import * as express from "express";
 import { Kernel } from "inversify";
 
+let kernel = new Kernel();
+
 module server {
-    let kernel = new Kernel();
+
     let server = new InversifyExpressServer(kernel);
 
     server
@@ -54,6 +56,8 @@ module decorators {
         @Method("foo", "/")
         public testMethod() { return "METHOD:FOO"; }
     }
+
+    kernel.bind<Controller>(TYPE.Controller).to(TestController);
 
     function m1(req: express.Request, res: express.Response, next: express.NextFunction) { next(); }
     function m2(req: express.Request, res: express.Response, next: express.NextFunction) { next(); }
