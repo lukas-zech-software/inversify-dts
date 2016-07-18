@@ -200,6 +200,7 @@ declare namespace inversify {
 
         export interface BindingInSyntax<T> {
             inSingletonScope(): BindingWhenOnSyntax<T>;
+            inTransientScope(): BindingWhenOnSyntax<T>;
         }
 
         export interface BindingInWhenOnSyntax<T> extends BindingInSyntax<T>, BindingWhenOnSyntax<T> {}
